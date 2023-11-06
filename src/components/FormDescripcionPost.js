@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import React, { Component } from 'react'
 import { TextInputComponent } from 'react-native'
 
+
 export default class FormDescripcionPost extends Component {
     constructor(props){
         super(props)
@@ -26,9 +27,10 @@ export default class FormDescripcionPost extends Component {
             />
             <TouchableOpacity
                 style={styles.btn}
-                onPress={()=> this.props.onSubmit({
-                    descripcion: this.state.descripcionPost
-                })}
+            onPress={()=> {this.state.descripcionPost==''? alert('completa tu post'): this.props.onSubmit({
+                descripcion: this.state.descripcionPost
+            });
+                     this.props.navigation.navigate('Home')}}
             >
                 <Text>
                     Enviar

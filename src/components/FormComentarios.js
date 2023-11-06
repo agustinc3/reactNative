@@ -38,9 +38,14 @@ export default class FormComentarios extends Component {
             style={styles.input}
         />
         <TouchableOpacity
-            onPress={()=> this.enviarComentario(this.state.comentario)}
+            onPress={()=>{if (this.state.comentario=='') {
+                alert('escribe un comentario')
+                
+            } else {
+                this.enviarComentario(this.state.comentario)}
+            } }
         >
-            <Text>
+            <Text style={styles.boton} >
                 Enviar
             </Text>
         </TouchableOpacity>
@@ -53,5 +58,10 @@ const styles = StyleSheet.create({
     input:{
         borderWidth:1,
         borderColor:'green'
+    },
+    boton:{
+        backgroundColor:'purple',
+        color:'white',
+        textAlign:'center'
     }
 })

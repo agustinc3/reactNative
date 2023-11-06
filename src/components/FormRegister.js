@@ -29,7 +29,7 @@ class FormRegister extends Component {
     render() {
         return (
         <View>
-            <Text>Registrate a mi app</Text>
+            <Text style={styles.title}>Registrate a mi app</Text>
             <View>
                 <TextInput
                     style = {styles.input}
@@ -61,16 +61,7 @@ class FormRegister extends Component {
                     onChangeText = { (text) => this.setState({password: text}) }
                 />
 
-                <Text
-                    style={styles.textLink}
-                >
-                    ¿Tienes una cuenta?
-                    <TouchableOpacity
-                        onPress={()=> this.props.navigation.navigate('Login')}
-                    >
-                        Logueate aquí!
-                    </TouchableOpacity>
-                </Text>
+                
 
 
                 <TouchableOpacity 
@@ -87,6 +78,16 @@ class FormRegister extends Component {
                 style={styles.btn}>
                     <Text style={styles.textBtn}>Registrame ahora!!</Text>
                 </TouchableOpacity>
+                <Text
+                    style={styles.textLink}
+                >
+                    ¿Tienes una cuenta?
+                    <TouchableOpacity
+                        onPress={()=> this.props.navigation.navigate('Login')}
+                    >
+                        Logueate aquí!
+                    </TouchableOpacity>
+                </Text>
 
             </View>
 
@@ -103,13 +104,24 @@ const styles = StyleSheet.create({
     },
     btn:{
         backgroundColor:'purple',
-        padding:16
+        padding:16,
+        marginBottom: 24
+        
+        
     },
     textBtn:{
-        color:'white'
+        color:'white',
+        textAlign:'center'
     },
     textLink:{
         marginBottom:24
+    },
+    title:{
+        fontSize:16,
+        fontWeight:'bold',
+        textDecorationLine:'underline',
+        textAlign:'center',
+        marginBottom:4
     }
 })
 

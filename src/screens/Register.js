@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet} from 'react-native'
 import React, { Component } from 'react'
 import { auth } from '../firebase/config'
 import FormRegister from '../components/FormRegister'

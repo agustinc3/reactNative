@@ -58,12 +58,14 @@ export default class Post extends Component {
     render() {
         return (
         <View style={styles.containerPost}>
-            <Text>{this.props.data.owner}</Text>
+            <Text style={styles.usuario}>{this.props.data.owner}</Text>
             <Text>{this.props.data.descripcion}</Text>
             <View>
                 
                 {
                     this.state.estaMiLike ?
+                    <View style={styles.likeContainer}>
+                        <Text>{this.props.data.likes.length}</Text>
                         <TouchableOpacity
                         onPress={()=> this.unlike()}
                         >
@@ -73,7 +75,10 @@ export default class Post extends Component {
                             size={24}
                             />
                         </TouchableOpacity>
+                        </View>
                         :
+                        <View style={styles.likeContainer}>
+                        <Text>{this.props.data.likes.length}</Text>
                         <TouchableOpacity
                         onPress={()=> this.like()}
                         >
@@ -83,18 +88,17 @@ export default class Post extends Component {
                         size={24}
                         />
                         </TouchableOpacity>
+                        </View>
                 }
             
             </View>
             
-            <Text>
-                    {this.props.data.likes.length}
-                </Text>
+            
             <View>
-                <TouchableOpacity
+                <TouchableOpacity style={styles.comentarBtn}
                     onPress={()=> this.irAComentar()}
                 >
-                    <Text>Comentar {this.props.data.comentarios ? '(' + this.props.data.comentarios.length + ')' :  '(0)'}</Text>
+                    <Text style={styles.comentarTxt}>Comentar {this.props.data.comentarios ? '(' + this.props.data.comentarios.length + ')' :  '(0)'}</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -104,6 +108,26 @@ export default class Post extends Component {
 
 const styles = StyleSheet.create({
     containerPost:{
-        marginBottom:16
+        marginBottom:8,
+        marginTop:8,
+        borderWidth: 1,
+        borderColor: 'purple'
+        
     },
+    likeContainer:{
+        display:'flex',
+        flexDirection:'row',
+        marginTop:10
+    },
+    comentarBtn:{
+        backgroundColor:'purple',
+        textAlign:'right'
+    },
+    comentarTxt:{
+        color:'white',
+        textAlign:'right'
+    },
+    usuario:{
+        fontWeight:'bold'
+    }
 })

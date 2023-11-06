@@ -22,7 +22,7 @@ export default class FormLogin extends Component {
   render() {
     return (
       <View>
-        <Text>Logueate en mi app</Text>
+        <Text style={styles.title}>Logueate en mi app</Text>
         <View>
                 <TextInput
                     style = {styles.input}
@@ -46,7 +46,7 @@ export default class FormLogin extends Component {
                         alert('Escribe tu email') }
                         else{this.loguearUsuario(this.state.mail, this.state.password)}}}
                 >
-                    <Text>Iniciar sesión</Text>
+                    <Text style={styles.textBtn}>Iniciar sesión</Text>
                 </TouchableOpacity>
         </View>
       </View>
@@ -66,6 +66,16 @@ const styles = StyleSheet.create({
         marginBottom: 24
     },
     textBtn:{
-        color:'white'
+        color:'white',
+        textAlign:'center'
+    },
+    title:{
+            fontSize:16,
+            fontWeight:'bold',
+            textDecorationLine:'underline',
+            textAlign:'center',
+            marginBottom:4
+    
     }
+    
 })

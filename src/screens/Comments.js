@@ -1,4 +1,4 @@
-import { Text, View, FlatList } from 'react-native'
+import { Text, View, FlatList,  StyleSheet} from 'react-native'
 import React, { Component } from 'react'
 import FormComentarios from '../components/FormComentarios'
 import { db } from '../firebase/config'
@@ -21,19 +21,22 @@ export default class Comments extends Component {
   render() {
     return (
       <View>
-        <Text>Comments</Text>
+        <Text style={styles.title}>Comments</Text>
         {
             this.state.dataPost !== null ?
-                <FlatList
+                <FlatList style={styles.container}
                     data={this.state.dataPost.comentarios}
                     keyExtractor = {(item)=> item.createdAt.toString()}
                     renderItem={({item})=> <View>
-                        <Text>{item.owner}</Text>
+                        <View style={styles.ownerContainer}> 
+                        <Text style={styles.owner}>{item.owner}</Text>
+                        <Text> dice:</Text>
+                        </View>
                         <Text>{item.comentario}</Text>
                     </View> }
                 />
             :
-            ''
+            <Text>Aún no hay comentarios </Text>
         }
         <FormComentarios
          postId= {this.props.route.params.id}
@@ -42,3 +45,21 @@ export default class Comments extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+    container:{marginBottom:10},
+    owner:{
+        fontWeight:'bold'
+    },
+    ownerContainer:{
+        display:'flex',
+        flexDirection:'row'
+    },
+    title:{
+        textAlign:'center',
+        fontSize:16,
+        fontWeight:'bold',
+        textDecorationLine:'underline',
+        marginBottom:4
+    }
+})

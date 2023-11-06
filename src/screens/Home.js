@@ -36,31 +36,10 @@ export default class Home extends Component {
                 <FlatList
                     data={this.state.posteos}
                     keyExtractor={(item)=> item.id.toString()}
-                    renderItem={({ item })=> <Post navigation={this.props.navigation} data={item.data} id={item.id}/>}
+                    renderItem={({ item })=> <Post navigation={this.props.navigation} data={item.data} id={item.id} />}
                 />
                 
             </View>
         )
     }
 }
-
-const styles = StyleSheet.create(
-    {
-        containerGral:{
-            flex:1
-        },
-        container : {
-            flex : 2,
-            alignContent:'centrer'
-    
-        },
-        containerGrande:{
-            flex:3,
-            backgroundColor:'blue'
-        },
-        containerChico:{
-            flex:1,
-            backgroundColor:'orange'
-        }
-    }
-) 
