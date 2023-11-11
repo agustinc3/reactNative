@@ -15,7 +15,8 @@ export default class Comments extends Component {
         .collection('posts')
         .doc(this.props.route.params.id)
         .onSnapshot((doc)=>{
-            this.setState({dataPost: doc.data() })
+            this.setState({dataPost: doc.data() }
+            )
         })
     }
   render() {
@@ -23,9 +24,9 @@ export default class Comments extends Component {
       <View>
         <Text style={styles.title}>Comments</Text>
         {
-            this.state.dataPost !== null ?
+            this.state.dataPost !== null && this.state.dataPost.comentarios !== undefined ?
                 <FlatList style={styles.container}
-                    data={this.state.dataPost.comentarios}
+                    data={this.state.dataPost.comentarios.sort((a, b)=> b.createdAt - a.createdAt)}
                     keyExtractor = {(item)=> item.createdAt.toString()}
                     renderItem={({item})=> <View>
                         <View style={styles.ownerContainer}> 
