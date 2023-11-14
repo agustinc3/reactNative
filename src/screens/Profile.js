@@ -1,12 +1,14 @@
 import { Text, View, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
 import React, { Component } from 'react'
 import { auth, db } from '../firebase/config'
+import Post from '../components/Post'
 
 export default class Profile extends Component {
   constructor(props){
     super(props)
     this.state={
-      usuarios: []
+      usuarios: [],
+      posts: [],
     }
   }
 
@@ -23,12 +25,27 @@ export default class Profile extends Component {
         usuarios: arrDocs
       },() => console.log(this.state.usuarios))
     })
-    console.log(this.props)
+    db.collection('posts').where('owner', '==', auth.currentUser.email).onSnapshot((docs)=>{
+      let arrPosts = []
+      docs.forEach((doc)=>{
+        arrPosts.push({
+          id:doc.id,
+          data: doc.data()
+        })
+      })
+      this.setState({
+        posts: arrPosts
+      },() => console.log(this.state.posts))
+    })
   }
 
   logout(){
     auth.signOut()
     this.props.navigation.navigate('Register')
+  }
+  eliminarPost(idPost){
+    db.collection('posts').doc(idPost).delete()
+
   }
 
   render() {
@@ -45,9 +62,22 @@ export default class Profile extends Component {
           </View>
             }
          />
+          <Text>Cantidad de posteos: {this.state.posts.length}</Text>
+            <FlatList
+            data={this.state.posts}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) =>
+                <View>
+                    <Post navigation={this.props.navigation} data={item.data} id={item.id} />
+                    <TouchableOpacity
+                    style={styles.btnEliminar}
+                    onPress={()=>this.eliminarPost(item.id)}> 
+                    <Text style={styles.textEliminar}>Elimar Posteo</Text>
+                    </TouchableOpacity>
+                </View>
+            }
+            />
 
-
-        
           <TouchableOpacity
           style={styles.signoutBtn}
           onPress={()=> this.logout()}
@@ -64,5 +94,11 @@ const styles = StyleSheet.create({
   signoutBtn:{
     backgroundColor:'red',
     padding: 16
+  },
+  btnEliminar:{
+    backgroundColor:'#Be2542',
+    padding: 10,
+    borderRadius:6,
+    marginBottom: 10
   }
 })
