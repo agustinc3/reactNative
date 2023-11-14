@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 
 import React, { Component } from 'react'
@@ -55,13 +55,31 @@ export default class Post extends Component {
         this.props.navigation.navigate('Comments',{id: this.props.id})
     }
 
+    botonPerfil(){
+        this.props.data.owner == auth.currentUser.email ?
+        this.props.navigation.navigate('Profile')
+        :
+        this.props.navigation.navigate('ProfileUser', { user: this.props.data.owner })
+    }
+
     render() {
         return (
         <View style={styles.containerPost}>
-            <Text style={styles.usuario}>{this.props.data.owner}</Text>
+            <Image
+               source = {{uri: this.props.data.urlFoto ? this.props.data.urlFoto : '' }}
+               style = {styles.img} 
+               resizeMode='contain' 
+           
+            />
             <Text>{this.props.data.descripcion}</Text>
+            <TouchableOpacity
+            onPress={() => this.botonPerfil()}
+            ><Text>{this.props.data.owner}</Text></TouchableOpacity>
+
+            {/* <Text style={styles.usuario}>{this.props.data.owner}</Text>
+            <Text>{this.props.data.descripcion}</Text> */}
             <View>
-                
+            
                 {
                     this.state.estaMiLike ?
                     <View style={styles.likeContainer}>
@@ -129,5 +147,9 @@ const styles = StyleSheet.create({
     },
     usuario:{
         fontWeight:'bold'
+    },
+    img: {
+        width: '100% ',
+        height : 200
     }
 })
