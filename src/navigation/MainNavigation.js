@@ -7,6 +7,7 @@ import TabNavigation from './TabNavigation';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Comments from '../screens/Comments';
+import ProfileUser from '../screens/ProfileUser';
 
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,13 @@ export default function MainNavigation() {
           //   headerShown: false
           // }}
         />
+        <Stack.Screen
+            name = 'ProfileUser'
+            component={ProfileUser}
+            //options={{
+            //    headerShown: false
+            //}}
+            />
       </Stack.Navigator>
     </NavigationContainer>
   )
