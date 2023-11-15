@@ -15,9 +15,10 @@ export default class FichaUsuario extends Component {
 
 render(){
     return(
-            <Text>
-            {this.props.nombre}
-            </Text>
+        <TouchableOpacity onPress={() => this.props.PerfilDeUsuario(this.props.nombre)}>
+        <Text>{this.props.nombre}</Text>
+        <Text>{this.props.owner}</Text>
+      </TouchableOpacity>
         )
     }
 }
