@@ -18,7 +18,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.loader}>
         <FormLogin navigation={this.props.navigation} />
         <Text>
           ¿Aún no tienes una cuenta? 
@@ -32,8 +32,10 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        
-        justifyContent:'center'
-    }
+  loader:{
+    display:'flex',
+    flex:1,
+    justifyContent:'center',
+    alignItems: 'center'
+  }
 })

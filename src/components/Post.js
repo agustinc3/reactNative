@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Image , FlatList } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 
 import React, { Component } from 'react'
@@ -10,16 +10,26 @@ export default class Post extends Component {
         super(props)
         this.state = {
             likes:0,
-            estaMiLike:false
+            estaMiLike:false,
+            dataPost: null
         }
     }
 
     componentDidMount(){
+        console.log(this.props);
         let validacionLike = this.props.data.likes.includes(auth.currentUser.email)
         this.setState({
             estaMiLike: validacionLike
         })
+        db
+        .collection('posts')
+        .doc(this.props.id)
+        .onSnapshot((doc)=>{
+            this.setState({dataPost: doc.data() }
+            )
+        })
     }
+
 
     like(){
         db
@@ -71,10 +81,10 @@ export default class Post extends Component {
                resizeMode='contain' 
            
             />
-            <Text>{this.props.data.descripcion}</Text>
+            <Text style={styles.descripcion}>{this.props.data.descripcion}</Text>
             <TouchableOpacity
             onPress={() => this.botonPerfil()}
-            ><Text>{this.props.data.owner}</Text></TouchableOpacity>
+            ><Text style={styles.owner}>{this.props.data.owner}</Text></TouchableOpacity>
 
             {/* <Text style={styles.usuario}>{this.props.data.owner}</Text>
             <Text>{this.props.data.descripcion}</Text> */}
@@ -113,12 +123,32 @@ export default class Post extends Component {
             
             
             <View>
+            <View style={styles.commentContainer}>
                 <TouchableOpacity style={styles.comentarBtn}
                     onPress={()=> this.irAComentar()}
-                >
+                >   
+                <FontAwesome
+                name='comment-o'
+                color='white'
+                size={20}
+                />
                     <Text style={styles.comentarTxt}>Comentar {this.props.data.comentarios ? '(' + this.props.data.comentarios.length + ')' :  '(0)'}</Text>
-                </TouchableOpacity>
-            </View>
+                </TouchableOpacity></View>
+                </View>
+
+                {this.state.dataPost !== null && this.state.dataPost.comentarios.length !== 0 ? 
+                <FlatList style={styles.container}
+                    data={this.state.dataPost.comentarios.sort((a, b)=> b.createdAt - a.createdAt).slice(0,4)}
+                    keyExtractor = {(item)=> item.createdAt.toString()}
+                    renderItem={({item})=> <View>
+                        <View style={styles.ownerContainer}> 
+                        <Text style={styles.owner}>{item.owner}</Text>
+                        </View>
+                        <Text>{item.comentario}</Text>
+                    </View> }/>             :
+            <Text>Aún no hay comentarios </Text>
+        }
+            
         </View>
         )
     }
@@ -134,10 +164,11 @@ const styles = StyleSheet.create({
     },
     likeContainer:{
         display:'flex',
-        flexDirection:'row',
-        marginTop:10
+        flexDirection:'row-reverse',
     },
     comentarBtn:{
+        display:'flex',
+        flexDirection:'row',
         backgroundColor:'purple',
         textAlign:'right'
     },
@@ -151,5 +182,12 @@ const styles = StyleSheet.create({
     img: {
         width: '100% ',
         height : 200
+    },
+    descripcion:{
+        textAlign:'center'
+    },
+    owner:{
+        fontWeight:'bold'
     }
+    
 })

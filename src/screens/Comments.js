@@ -19,12 +19,15 @@ export default class Comments extends Component {
             )
         })
     }
+    componentDidUpdate(){
+        console.log(this.state.dataPost);
+    }
   render() {
     return (
       <View>
         <Text style={styles.title}>Comments</Text>
         {
-            this.state.dataPost !== null && this.state.dataPost.comentarios !== undefined ?
+            this.state.dataPost !== null && this.state.dataPost.comentarios.length !== 0 ? 
                 <FlatList style={styles.container}
                     data={this.state.dataPost.comentarios.sort((a, b)=> b.createdAt - a.createdAt)}
                     keyExtractor = {(item)=> item.createdAt.toString()}
