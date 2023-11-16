@@ -19,10 +19,14 @@ class FormRegister extends Component {
                 owner: this.state.mail,
                 createdAt: Date.now(),
                 name: this.state.name,
-                minibio: this.state.minibio ? this.state.minibio: ' '
+                minibio: this.state.minibio ? this.state.minibio: ' ',
+                fotoPerfil: ''
             }) 
         )
-        .then((resp) => console.log(resp))
+        .then(resp => { 
+            console.log(resp)
+            this.props.navigation.navigate('InfoAdicionalUser', { docId : resp.id})
+        })
         .catch( err => console.log(err))
     }
 
