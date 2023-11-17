@@ -9,7 +9,8 @@ class FormRegister extends Component {
             name:'',
             mail: '',
             password: '',
-            minibio:''
+            minibio:'',
+            fotoPerfil:''
         }
     }
 

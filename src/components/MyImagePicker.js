@@ -20,11 +20,11 @@ export default class MyImagePicker extends Component {
       fetch(this.setState.imagenCargada)
       .then(resp => resp.blob( ))
       .then(imagen =>{
-        let ref = storage.ref(`imgPerfil/${Datenow()}.jpg`)
+        let ref = storage.ref(`imgPerfil/${Date.now()}.jpg`)
         ref.put(imagen)
         .then(()=>{
           ref.getDownloadURL()
-          .then(url =>  this.props.actualizarFotoDePerfil(url ) )
+          .then(url =>  this.props.actualizarEstadoFotoDePerfil(url ) )
         })
       } )
       .catch(err=>  console.log (err) )

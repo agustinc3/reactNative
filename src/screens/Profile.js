@@ -51,7 +51,7 @@ export default class Profile extends Component {
   render() {
     return (
       <View>
-        <Text>El email del usuario es:</Text>
+        <Text>Perfil del usuario:</Text>
           <FlatList
           data={this.state.usuarios}
           keyExtractor={(item)=> item.id.toString()}
@@ -59,6 +59,15 @@ export default class Profile extends Component {
             <Text>{item.data.name}</Text>
           <Text>{item.data.owner}</Text>
           <Text>{item.data.minibio}</Text>
+          {item.data.fotoPerfil !== '' ? 
+                <Image 
+                source={{uri: item.data.fotoPerfil}}
+                resizeMode='contain'
+                />
+                :
+                ''
+              }
+             
           </View>
             }
          />

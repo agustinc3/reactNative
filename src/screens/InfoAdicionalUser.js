@@ -22,7 +22,7 @@ export default class InfoAdicionalUser extends Component {
         fotoPerfil:  this.state.fotoPerfil
     })
     .then(resp => {
-        this.props.navigation.navigate('HomeNav')
+        this.props.navigation.navigate('TabNavigation') // que va axa?
     })
   }
   
