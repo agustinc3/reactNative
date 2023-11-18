@@ -11,18 +11,19 @@ export default class InfoAdicionalUser extends Component {
     }
   }
   actualizarEstadoFotoDePerfil(url){
-    this.setState ({fotoPerfil: url})
+    this.setState ({
+        fotoPerfil: url
+    })
   }
   actualizarDocDelUsuario(){
     console.log(this.props.route.params.docId)
-    db
-    .collection ('users')
+    db.collection ('users')
     .doc(this.props.route.params.docId)
     .update({
         fotoPerfil:  this.state.fotoPerfil
     })
     .then(resp => {
-        this.props.navigation.navigate('TabNavigation') // que va axa?
+        this.props.navigation.navigate('TabNavigation') 
     })
   }
   
@@ -33,7 +34,6 @@ export default class InfoAdicionalUser extends Component {
         <MyImagePicker actualizarEstadoFotoDePerfil= {(url)=> this.actualizarEstadoFotoDePerfil(url )} />
         {
             this.state.fotoPerfil !== '' ? 
-
         
             
             <TouchableOpacity  

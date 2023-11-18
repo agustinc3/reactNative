@@ -17,14 +17,14 @@ export default class MyImagePicker extends Component {
         .catch( err=> console.log (err))
     }
     aceptarImagen  (){
-      fetch(this.setState.imagenCargada)
+      fetch(this.state.imagenCargada)
       .then(resp => resp.blob( ))
       .then(imagen =>{
-        let ref = storage.ref(`imgPerfil/${Date.now()}.jpg`)
+        let ref = storage.ref(`imgPerfil/${Date.now()}.jpeg`)
         ref.put(imagen)
         .then(()=>{
           ref.getDownloadURL()
-          .then(url =>  this.props.actualizarEstadoFotoDePerfil(url ) )
+          .then((url) => {this.props.actualizarEstadoFotoDePerfil(url)})
         })
       } )
       .catch(err=>  console.log (err) )
@@ -38,23 +38,23 @@ export default class MyImagePicker extends Component {
     render() {
       return (
         <View>
-          {this.state.imagenCargada != '' ?
+          {this.state.imagenCargada !== '' ?
           <>
-          <Image
-          source = {{uri: this.state.imagenCargada}}
-          style = {styles.img}
-          />
-          <TouchableOpacity 
-          onPress={()=> this.aceptarImagen()}
-          style = {styles.btn}>
+            <Image
+            source={{uri: this.state.imagenCargada}}
+            style = {styles.img}
+            />
+            <TouchableOpacity 
+            onPress={()=> this.aceptarImagen()}
+            style = {styles.btn}>
             <Text style = {styles.textBtn}>Aceptar imagen</Text> 
-          </TouchableOpacity>
+            </TouchableOpacity>
           
-          <TouchableOpacity 
-          onPress={()=> this.rechazarImagen()}
-          style = {styles.btn}>
+            <TouchableOpacity 
+            onPress={()=> this.rechazarImagen()}
+            style = {styles.btn}>
             <Text style = {styles.textBtn}>Rechazar imagen</Text>
-          </TouchableOpacity>
+            </TouchableOpacity>
   
           </>
 
@@ -81,7 +81,16 @@ export default class MyImagePicker extends Component {
   }
   
   const styles = StyleSheet.create({
-      img: {
-        height : 200
-      }
+    img: {
+      height : 200
+    },
+    btn:{
+      backgroundColor:'purple',
+      padding:16,
+      marginBottom: 24
+    },
+    textBtn:{
+      color:'white',
+      textAlign:'center'
+    },
     })
