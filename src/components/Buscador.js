@@ -30,10 +30,17 @@ class Buscador extends Component{
             <TextInput onSubmit={(evento)=> this.evitarSubmit(evento)}
               placeholder='Busca usuarios'
             keyboardType='default' onChange={(evento)=> this.guardarValor(evento)}
-            value={this.state.valorInput}/>
+            value={this.state.valorInput}
+            style={styles.input}
+            />
             </>
         )
     }
 }
-
+const styles = StyleSheet.create({
+input:{
+    borderWidth:1,
+    borderColor:'red'
+}
+});
 export default Buscador

@@ -15,11 +15,22 @@ export default class FichaUsuario extends Component {
 
 render(){
     return(
-        <TouchableOpacity onPress={() => this.props.PerfilDeUsuario(this.props.nombre)}>
+        <TouchableOpacity onPress={() => this.props.PerfilDeUsuario(this.props.nombre)} style={styles.nombres}>
         <Text>{this.props.nombre}</Text>
         <Text>{this.props.owner}</Text>
       </TouchableOpacity>
         )
     }
 }
+
+const styles = StyleSheet.create({
+
+    nombres: {
+        marginVertical: 5,
+        padding: 5,
+        backgroundColor: '#CDCDCD',
+        borderRadius: 5,
+      },
+    }
+  )
 

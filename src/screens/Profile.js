@@ -50,7 +50,7 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <View>
+      <View  style={styles.contenedor}>
         <Text>Perfil del usuario:</Text>
           <FlatList
           data={this.state.usuarios}
@@ -67,17 +67,18 @@ export default class Profile extends Component {
           </View>
             }
          />
-          <Text>Cantidad de posteos: {this.state.posts.length}</Text>
             <FlatList
+            
             data={this.state.posts}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) =>
-                <View>
+                <View >
+                    <Text>Cantidad de posteos: {this.state.posts.length}</Text>
                     <Post navigation={this.props.navigation} data={item.data} id={item.id} />
                     <TouchableOpacity
                     style={styles.btnEliminar}
                     onPress={()=>this.eliminarPost(item.id)}> 
-                    <Text style={styles.textEliminar}>Elimar Posteo</Text>
+                    <Text style={styles.textEliminar}>Eliminar Posteo</Text>
                     </TouchableOpacity>
                 </View>
             }
@@ -107,6 +108,8 @@ const styles = StyleSheet.create({
     marginBottom: 10},
     img:{
       height:200
-    }
-  }
-)
+    },
+      contenedor: {
+        flex:1
+      }
+    })

@@ -24,6 +24,7 @@ export default class Home extends Component {
             data: doc.data()
           })
         })
+        arrUsers.sort((a, b) => a.data.owner.localeCompare(b.data.owner)); // https://www.w3schools.com/jsref/jsref_localecompare.asp
 
         this.setState({
           users: arrUsers,
@@ -38,8 +39,8 @@ export default class Home extends Component {
     );
 
     this.setState({
-      // https://www.w3schools.com/jsref/jsref_localecompare.asp
-      users: usuariosFiltrados.sort((a, b) => a.data.name.localeCompare(b.data.name)),
+      
+      users: usuariosFiltrados,
     });
   }
 
@@ -53,11 +54,11 @@ export default class Home extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.contenedor}>
         <Buscador navigation={this.props.navigation} filtrarUsuarios={(nombre) => this.filtrarUsuarios(nombre)} />
         {this.state.users.length === 0 ? <Text>El usuario no existe</Text> :
           <FlatList
-            style={styles.nombres}
+            
             data={this.state.users}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => <FichaUsuario nombre={item.data.name} id={item.id} owner={item.data.owner} PerfilDeUsuario={(nombre) =>this.PerfilDeUsuario(nombre)}/>} />
@@ -68,7 +69,7 @@ export default class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-  nombres: {
-    textDecorationStyle: 'dashed'
+  contenedor: {
+    flex:1
   }
-});
+})
