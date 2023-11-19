@@ -104,6 +104,9 @@ const styles = StyleSheet.create({
     backgroundColor:'#Be2542',
     padding: 10,
     borderRadius:6,
-    marginBottom: 10
+    marginBottom: 10},
+    img:{
+      height:200
+    }
   }
-})
+)

@@ -13,7 +13,7 @@ export default class MyImagePicker extends Component {
     }
     activarPicker(){
         ImagePicker.launchImageLibraryAsync()
-        .then(imageData =>  this.setState({imagenCargada:imageData.assets[0]} ) )
+        .then(imageData =>  this.setState({imagenCargada:imageData.assets[0].uri} ) )
         .catch( err=> console.log (err))
     }
     aceptarImagen  (){
