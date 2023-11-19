@@ -1,4 +1,4 @@
-import { Text, View , TouchableOpacity} from 'react-native'
+import { Text, View , TouchableOpacity, StyleSheet} from 'react-native'
 import React, { Component } from 'react'
 import MyImagePicker from '../components/MyImagePicker'
 import { db  } from '../firebase/config'
@@ -38,15 +38,19 @@ export default class InfoAdicionalUser extends Component {
             
             <TouchableOpacity  
             onPress={() => this.actualizarDocDelUsuario()}
+            style= {styles.btn}
             >
-            <Text>
+            <Text  style = {styles.textBtn}>
                 Añadir foto de perfil
             </Text>
         </TouchableOpacity>
         : null
        }
-        <TouchableOpacity>
-            <Text>
+        <TouchableOpacity
+        style= {styles.btn}
+        onPress={()=> this.props.navigation.navigate('Login')}
+        >
+            <Text  style = {styles.textBtn}>
                 Omitir este paso
             </Text>
         </TouchableOpacity>
@@ -55,3 +59,14 @@ export default class InfoAdicionalUser extends Component {
     )
   }
 }
+const styles = StyleSheet.create({
+    btn:{
+      backgroundColor:'purple',
+      padding:16,
+      marginBottom: 24
+    },
+    textBtn:{
+        color:'white',
+        textAlign:'center'
+      }
+})
