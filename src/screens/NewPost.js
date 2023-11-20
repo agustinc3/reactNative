@@ -52,7 +52,7 @@ export default class NewPost extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>NewPost</Text>
+        <Text>Crear nuevo posteo</Text>
         {
           this.state.paso1 ?
             <CamaraPost
@@ -71,7 +71,7 @@ export default class NewPost extends Component {
 
                 })}>
 
-                <Text> Enviar</Text>
+                <Text style={styles.textBtn} > Enviar</Text>
               </TouchableOpacity>
 
             </>
@@ -86,10 +86,19 @@ export default class NewPost extends Component {
 }
 const styles = StyleSheet.create({
   btn: {
-    borderWidth: 1,
-    borderColor: 'green'
+    backgroundColor:'green',
+    height: 50,
+    padding:16,
+    marginBottom: 24
+    // borderWidth: 1,
+    // borderColor: 'green',
+    
   },
   container: {
     flex: 1
-  }
+  },
+  textBtn:{
+    color:'white',
+    textAlign:'center'
+  },
 })

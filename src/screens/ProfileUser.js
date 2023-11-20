@@ -50,7 +50,7 @@ export default class Profile extends Component {
   
   render() {
     return (
-      <View>
+      <View style={styles.contenedor} >
         <Text>Email de usuario : </Text>
             <FlatList
             data={this.state.usuarios}
@@ -71,7 +71,7 @@ export default class Profile extends Component {
                 <View>
                     <Post navigation={this.props.navigation} data={item.data} id={item.id} />
                     <TouchableOpacity
-                    style={styles.btnElimanr}
+                    style={styles.btnEliminar}
                     onPress={()=>this.eliminarPosteo(item.id)}> 
                     <Text style={styles.textEliminar}>Elimar Posteo</Text>
                     </TouchableOpacity>
@@ -87,13 +87,31 @@ const styles = StyleSheet.create({
       backgroundColor:'#Be2542',
       padding: 10,
       borderRadius:6,
-      
-      
     },
     btnEliminar:{
-      backgroundColor:'#Be2542',
+      backgroundColor:'purple',
       padding: 10,
       borderRadius:6,
       marginBottom: 10
+    },
+    img:{
+      height:100,
+      width:500,
+    },
+    contenedor: {
+        flex:1,
+        paddingHorizontal: 16,
+        paddingTop: 16,
+    },
+    postContainer:{
+        marginBottom: 16,
+        backgroundColor: '#FFFFFF', // White background for the "box"
+        borderRadius: 8, // Border radius for rounded corners
+        padding: 16,
+        elevation: 2, // Shadow for a slight lift
+    },
+    textEliminar:{
+      color:'white',
+      textAlign:'center'
     }
   })

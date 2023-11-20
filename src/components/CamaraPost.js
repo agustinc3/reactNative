@@ -65,8 +65,9 @@ export default class CamaraPost extends Component {
                 />
                 <TouchableOpacity
                     onPress={() => this.tomarFoto()}
+                    style={styles.btnFoto}
                 >
-                    <Text>Tomar foto</Text>
+                    <Text style={styles.textBtn}>Tomar foto</Text>
                 </TouchableOpacity>
             </>
             : this.state.permisos && this.state.mostrarCamara === false ?
@@ -78,15 +79,20 @@ export default class CamaraPost extends Component {
                     />
                     <TouchableOpacity
                         onPress={()=> this.aceptarFoto()}
+                        style={styles.btnFoto}
                     >
-                        <Text>
+                        <Text
+                        style={styles.textBtn}
+                        >
                             Aceptar Foto
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={()=> this.rechazarFoto()}
+                        style={styles.btnFoto}
                     >
                         <Text
+                         style={styles.textBtn}
                         >
                             Rechazar Foto
                         </Text>
@@ -107,9 +113,20 @@ const styles = StyleSheet.create({
         flex:1
     },
     camara: {
-        height: 300
+        height: 200
     },
     img:{
         height: 300
-    }
+    },
+    btnFoto: {
+        backgroundColor:'purple',
+        height: 50,
+        padding:16,
+        marginBottom: 24
+    },
+    textBtn:{
+        color:'white',
+        textAlign:'center',
+        margin: 'auto'
+      }
 })

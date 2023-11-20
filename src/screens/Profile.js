@@ -72,7 +72,7 @@ export default class Profile extends Component {
             data={this.state.posts}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) =>
-                <View >
+                <View  style={styles.postContainer}>
                     <Text>Cantidad de posteos: {this.state.posts.length}</Text>
                     <Post navigation={this.props.navigation} data={item.data} id={item.id} />
                     <TouchableOpacity
@@ -105,11 +105,22 @@ const styles = StyleSheet.create({
     backgroundColor:'#Be2542',
     padding: 10,
     borderRadius:6,
-    marginBottom: 10},
-    img:{
-      height:200
+    marginBottom: 10
+  },
+  img:{
+      height:100,
+      width:500,
     },
-      contenedor: {
-        flex:1
-      }
+    contenedor: {
+        flex:1,
+        paddingHorizontal: 16,
+        paddingTop: 16,
+    },
+    postContainer:{
+        marginBottom: 16,
+        backgroundColor: '#FFFFFF', // White background for the "box"
+        borderRadius: 8, // Border radius for rounded corners
+        padding: 16,
+        elevation: 2, // Shadow for a slight lift
+    },
     })
