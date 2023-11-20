@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, StyleSheet, FlatList } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native'
 import React, { Component } from 'react'
 import {auth, db} from '../firebase/config'
 import Post from '../components/Post'
@@ -25,9 +25,8 @@ export default class Profile extends Component {
         this.setState({
           usuarios : arrDocs
         })
-  
       })
-    db.collection('posts').where('owner', '==', this.props.route.params.user).onSnapshot((docs)=>{
+      db.collection('posts').where('owner', '==', this.props.route.params.user).onSnapshot((docs)=>{
         let arrPosts = []
         docs.forEach((doc)=> {
           arrPosts.push({
@@ -47,71 +46,76 @@ export default class Profile extends Component {
 
   }
   
-  
+  componentDidUpdate(){
+    console.log(this.state.usuarios)
+    console.log(this.state.posteos);
+    console.log(this.props.route.params.owner);
+  }
   render() {
     return (
-      <View style={styles.contenedor} >
-        <Text>Email de usuario : </Text>
-            <FlatList
-            data={this.state.usuarios}
-            keyExtractor={(item)=> item.id.toString() }
-            renderItem={({item}) => <View>
+      <View style={styles.contenedor}>
+
+        <FlatList
+          data={this.state.usuarios}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View>
               <Text>{item.data.owner}</Text>
               <Text>{item.data.name}</Text>
               <Text>{item.data.miniBio}</Text>
-              </View>
-               }
-            />
-            <Text>Posteos del usuario:{this.props.route.params.user}</Text>
-            <Text>Cantidad de posteos: {this.state.posteos.length}</Text>
-            <FlatList
-            data={this.state.posteos}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) =>
-                <View>
-                    <Post navigation={this.props.navigation} data={item.data} id={item.id} />
-                    <TouchableOpacity
-                    style={styles.btnEliminar}
-                    onPress={()=>this.eliminarPosteo(item.id)}> 
-                    <Text style={styles.textEliminar}>Elimar Posteo</Text>
-                    </TouchableOpacity>
-                </View>
-            }
-            />
+              {item.data.fotoPerfil != '' ? (
+                  <Image
+                    source={item.data.fotoPerfil}
+                    style={styles.img}
+                    resizeMode="contain"
+                  />
+                ) : ''}
+          </View>
+        )}
+      />
+        <FlatList
+          data={this.state.posteos}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.postContainer}>
+              <Text>Cantidad de posteos: {this.state.posteos.length}</Text>
+              <Post navigation={this.props.navigation} data={item.data} id={item.id} />
+            </View>
+          )}
+        />
       </View>
-    )
-  }
-}
-const styles = StyleSheet.create({
-    signoutBtn:{
-      backgroundColor:'#Be2542',
+    );
+  }}
+  
+  const styles = StyleSheet.create({
+    signoutBtn: {
+      backgroundColor: '#Be2542',
       padding: 10,
-      borderRadius:6,
+      borderRadius: 6,
     },
-    btnEliminar:{
-      backgroundColor:'purple',
+    btnEliminar: {
+      backgroundColor: 'purple',
       padding: 10,
-      borderRadius:6,
-      marginBottom: 10
+      borderRadius: 6,
+      marginBottom: 10,
     },
-    img:{
-      height:100,
-      width:500,
+    img: {
+      height: 100,
+      width: 350,
     },
     contenedor: {
-        flex:1,
-        paddingHorizontal: 16,
-        paddingTop: 16,
+      paddingHorizontal: 16,
+      paddingTop: 16,
     },
-    postContainer:{
-        marginBottom: 16,
-        backgroundColor: '#FFFFFF', // White background for the "box"
-        borderRadius: 8, // Border radius for rounded corners
-        padding: 16,
-        elevation: 2, // Shadow for a slight lift
+    postContainer: {
+      marginBottom: 16,
+      backgroundColor: '#FFFFFF',
+      borderRadius: 8,
+      padding: 16,
+      elevation: 2,
     },
-    textEliminar:{
-      color:'white',
-      textAlign:'center'
-    }
+    textEliminar: {
+      color: 'white',
+      textAlign: 'center',
+    },
   })

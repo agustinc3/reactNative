@@ -29,8 +29,8 @@ export default class InfoAdicionalUser extends Component {
   
     render() {
     return (
-      <View>
-        <Text>InfoAdicionalUser</Text>
+      <View style={styles.container}>
+
         <MyImagePicker actualizarEstadoFotoDePerfil= {(url)=> this.actualizarEstadoFotoDePerfil(url )} />
         {
             this.state.fotoPerfil !== '' ? 
@@ -69,4 +69,10 @@ const styles = StyleSheet.create({
         color:'white',
         textAlign:'center'
       }
+      ,
+      container:{
+      display:'flex',
+    flex:1,
+    justifyContent:'center',
+    alignItems: 'center'}
 })

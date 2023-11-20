@@ -51,19 +51,20 @@ export default class Profile extends Component {
   render() {
     return (
       <View  style={styles.contenedor}>
-        <Text>Perfil del usuario:</Text>
           <FlatList
           data={this.state.usuarios}
           keyExtractor={(item)=> item.id.toString()}
           renderItem={({item})=> <View> 
-          <Text>{item.data.name}</Text>
-          <Text>{item.data.owner}</Text>
-          <Text>{item.data.minibio}</Text>
-          <Image 
-            source={{uri: item.data.fotoPerfil}}
-            style={styles.img}
-          
-          />
+          <Text>Perfil de {item.data.name}</Text>
+          <Text style={styles.minibio}>{item.data.minibio}</Text>
+          {item.data.fotoPerfil ? (
+              <Image
+                style={styles.img}
+                source={{ uri: item.data.fotoPerfil }}
+              />
+            ) : (
+              <View style={{ height: 1 }} />
+            )}
           </View>
             }
          />
@@ -118,9 +119,12 @@ const styles = StyleSheet.create({
     },
     postContainer:{
         marginBottom: 16,
-        backgroundColor: '#FFFFFF', // White background for the "box"
-        borderRadius: 8, // Border radius for rounded corners
-        padding: 16,
-        elevation: 2, // Shadow for a slight lift
+        backgroundColor: '#FFFFFF',
+        borderRadius: 8, 
+        elevation: 2, 
     },
+    minibio:{
+      borderWidth:1,
+      borderColor:'green'
+    }
     })

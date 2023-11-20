@@ -52,7 +52,6 @@ export default class NewPost extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Crear nuevo posteo</Text>
         {
           this.state.paso1 ?
             <CamaraPost

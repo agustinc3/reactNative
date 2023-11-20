@@ -46,7 +46,7 @@ export default class Home extends Component {
 
   PerfilDeUsuario(nombre) {
     nombre == auth.currentUser.email ?
-      this.props.navigation.navigate('MyProfile')
+      this.props.navigation.navigate('Profile')
       :
       this.props.navigation.navigate('ProfileUser', { user: nombre })
   }
@@ -61,7 +61,7 @@ export default class Home extends Component {
             
             data={this.state.users}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => <FichaUsuario nombre={item.data.name} id={item.id} owner={item.data.owner} PerfilDeUsuario={(nombre) =>this.PerfilDeUsuario(nombre)}/>} />
+            renderItem={({ item }) => <FichaUsuario data={item.data} nombre={item.data.name} id={item.id} owner={item.data.owner} PerfilDeUsuario={(nombre) =>this.PerfilDeUsuario(nombre)}/>} />
         }
       </View>
     )
